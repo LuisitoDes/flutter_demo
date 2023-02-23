@@ -1,4 +1,4 @@
-import 'package:flutter_demo/dominio/i_autenticar.dart';
+import 'package:flutter_demo/dominio/autenticacion/i_autenticar.dart';
 
 class ComprobarPosibleAutenticacion
 {

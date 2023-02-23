@@ -1,6 +1,6 @@
-import 'package:flutter_demo/infraestructura/medidas.dart';
+import 'package:flutter_demo/infraestructura/app.dart';
+import 'package:flutter_demo/infraestructura/dispositivo/medidas.dart';
 import 'package:flutter_demo/infraestructura/paginas.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
 import 'package:flutter_demo/infraestructura/widgets/boton_con_icono.dart';
 import 'package:flutter_demo/infraestructura/widgets/png_visor.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +23,10 @@ class MenuLateral extends Drawer
           DrawerHeader(
               child: PngVisor('logo')
           ),
-          BotonMenuLateral(Traducciones.of(context).traducir('MenubtnEscaner'), Icons.barcode_reader, _accederCamara),
-          BotonMenuLateral(Traducciones.of(context).traducir('MenubtnWhatsapp'), Icons.message, _enviarWhatsapp),
-          BotonMenuLateral(Traducciones.of(context).traducir('MenubtnAcceder'), Icons.person, _accederPortal),
-          BotonMenuLateral(Traducciones.of(context).traducir('MenubtnAutenticar'), Icons.security, _autenticar)
+          BotonMenuLateral(traduccion(context, 'MenubtnEscaner'), Icons.barcode_reader, _accederCamara),
+          BotonMenuLateral(traduccion(context, 'MenubtnWhatsapp'), Icons.message, _enviarWhatsapp),
+          BotonMenuLateral(traduccion(context, 'MenubtnAcceder'), Icons.person, _accederPortal),
+          BotonMenuLateral(traduccion(context, 'MenubtnAutenticar'), Icons.security, _autenticar)
         ],
       ),
     );

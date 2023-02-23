@@ -1,5 +1,4 @@
 import 'package:flutter_demo/infraestructura/paginas.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
 import 'package:flutter_demo/infraestructura/widgets/png_visor.dart';
 import 'package:flutter_demo/infraestructura/widgets/scaffold_base.dart';
 import 'package:flutter/material.dart';

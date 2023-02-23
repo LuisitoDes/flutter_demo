@@ -1,7 +1,7 @@
-import 'package:flutter_demo/aplicacion/iniciar_autenticacion_use_case.dart';
+import 'package:flutter_demo/aplicacion/autenticacion/iniciar_autenticacion_use_case.dart';
+import 'package:flutter_demo/infraestructura/app.dart';
 import 'package:flutter_demo/infraestructura/autenticacion/autenticar.dart';
-import 'package:flutter_demo/infraestructura/medidas.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
+import 'package:flutter_demo/infraestructura/dispositivo/medidas.dart';
 import 'package:flutter_demo/infraestructura/widgets/boton_primario.dart';
 import 'package:flutter_demo/infraestructura/widgets/scaffold_base.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class _AutenticacionState extends State<Autenticacion>
   Widget build(BuildContext context)
   {
     return ScaffoldBase(
-      barraSuperior: Traducciones.of(context).traducir('AutenticacionlbAutenticar'),
+      barraSuperior: traduccion(context, 'AutenticacionlbAutenticar'),
       cuerpo: Container(
         width: double.infinity,
         child: Column(
@@ -38,9 +38,9 @@ class _AutenticacionState extends State<Autenticacion>
           children: [
             Padding(
               padding: EdgeInsets.only(bottom: separacion),
-              child: Text(Traducciones.of(context).traducir(valorEstadoAutenticacion)),
+              child: Text(traduccion(context, valorEstadoAutenticacion)),
             ),
-            BotonPrimario(Traducciones.of(context).traducir('AutenticacionbtnComenzar'), _comenzarAutenticacion)
+            BotonPrimario(traduccion(context, 'AutenticacionbtnComenzar'), _comenzarAutenticacion)
           ],
         ),
       ),

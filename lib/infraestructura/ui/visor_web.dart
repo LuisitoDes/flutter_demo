@@ -1,8 +1,8 @@
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_demo/aplicacion/obtener_url_visor_web_use_case.dart';
+import 'package:flutter_demo/aplicacion/portal/obtener_url_visor_web_use_case.dart';
+import 'package:flutter_demo/infraestructura/app.dart';
 import 'package:flutter_demo/infraestructura/colores.dart';
-import 'package:flutter_demo/infraestructura/dispositivo.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
+import 'package:flutter_demo/infraestructura/dispositivo/dispositivo.dart';
 import 'package:flutter_demo/infraestructura/widgets/cargando.dart';
 import 'package:flutter_demo/infraestructura/widgets/scaffold_base.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ class _VisorWebState extends State<VisorWeb>
   Widget build(BuildContext context)
   {
     Widget scaffold = ScaffoldBase(
-      barraSuperior: Traducciones.of(context).traducir('Visorlbvisor'),
+      barraSuperior: traduccion(context, 'Visorlbvisor'),
       cuerpo: Center(
         child: Cargando(),
       ),
@@ -47,7 +47,7 @@ class _VisorWebState extends State<VisorWeb>
     {
       scaffold = WillPopScope(onWillPop: _onWillPop,
           child: ScaffoldBase(
-            barraSuperior: Traducciones.of(context).traducir('Visorlbvisor'),
+            barraSuperior: traduccion(context, 'Visorlbvisor'),
             error: error,
             cuerpo: WebViewWidget(
               controller: controller,
@@ -70,7 +70,7 @@ class _VisorWebState extends State<VisorWeb>
     }
     else
     {
-      error = Traducciones.of(context).traducir('VisorlbNoHayConexion');
+      error = traduccion(context, 'VisorlbNoHayConexion');
     }
     setState(() {});
   }
@@ -80,6 +80,7 @@ class _VisorWebState extends State<VisorWeb>
     WebViewController wc = WebViewController();
     wc.setJavaScriptMode(JavaScriptMode.unrestricted);
     wc.setBackgroundColor(Colores.fondo);
+    wc.clearCache();
     wc.setNavigationDelegate(configurarNavegador());
 
     return wc;

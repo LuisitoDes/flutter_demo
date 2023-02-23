@@ -1,6 +1,6 @@
-import 'package:flutter_demo/dominio/autenticar_usuario.dart';
-import 'package:flutter_demo/dominio/comprobar_posible_autenticacion.dart';
-import 'package:flutter_demo/dominio/i_autenticar.dart';
+import 'package:flutter_demo/dominio/autenticacion/autenticar_usuario.dart';
+import 'package:flutter_demo/dominio/autenticacion/comprobar_posible_autenticacion.dart';
+import 'package:flutter_demo/dominio/autenticacion/i_autenticar.dart';
 
 class IniciarAutenticacionUseCase
 {

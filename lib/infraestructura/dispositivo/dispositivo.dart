@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter_demo/dominio/i_dispositivo.dart';
+import 'package:flutter_demo/dominio/dispositivo/i_dispositivo.dart';
 
 class Dispositivo implements IDispositivo
 {

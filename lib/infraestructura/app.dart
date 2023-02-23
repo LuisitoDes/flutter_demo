@@ -1,6 +1,6 @@
-import 'package:flutter_demo/aplicacion/obtener_idiomas_soportados_use_case.dart';
+import 'package:flutter_demo/aplicacion/dispositivo/obtener_idiomas_soportados_use_case.dart';
 import 'package:flutter_demo/infraestructura/paginas.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
+import 'package:flutter_demo/infraestructura/dispositivo/traducciones.dart';
 import 'package:flutter_demo/infraestructura/ui/autenticacion.dart';
 import 'package:flutter_demo/infraestructura/ui/escaner_codigo_barras.dart';
 import 'package:flutter_demo/infraestructura/ui/inicio.dart';
@@ -46,4 +46,9 @@ class BancoXApp extends StatelessWidget
 
     return listaIdiomasSoportados;
   }
+}
+
+String traduccion(BuildContext context, String clave)
+{
+  return Traducciones.of(context).traducir(clave);
 }

@@ -1,6 +1,6 @@
-import 'package:flutter_demo/dominio/comprobar_conexion_internet.dart';
-import 'package:flutter_demo/dominio/i_dispositivo.dart';
-import 'package:flutter_demo/dominio/obtener_url_portal_seguros.dart';
+import 'package:flutter_demo/dominio/dispositivo/comprobar_conexion_internet.dart';
+import 'package:flutter_demo/dominio/dispositivo/i_dispositivo.dart';
+import 'package:flutter_demo/dominio/portal/obtener_url_portal_seguros.dart';
 
 class ObtenerUrlVisorWebUseCase
 {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_demo/aplicacion/obtener_idiomas_soportados_use_case.dart';
+import 'package:flutter_demo/aplicacion/dispositivo/obtener_idiomas_soportados_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

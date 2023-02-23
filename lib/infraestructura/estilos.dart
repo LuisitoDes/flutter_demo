@@ -1,5 +1,5 @@
 import 'package:flutter_demo/infraestructura/colores.dart';
-import 'package:flutter_demo/infraestructura/medidas.dart';
+import 'package:flutter_demo/infraestructura/dispositivo/medidas.dart';
 import 'package:flutter/material.dart';
 
 ButtonStyle estiloBotonPrincipal = ElevatedButton.styleFrom(
@@ -8,14 +8,12 @@ ButtonStyle estiloBotonPrincipal = ElevatedButton.styleFrom(
     backgroundColor: Colores.principal
 );
 
-TextStyle estiloTituloBarraSuperior = const TextStyle(
-    fontSize: tamanioLetra,
-    color: Colores.textoBarraSuperior, 
-    fontWeight: FontWeight.bold
-);
+TextStyle estiloTituloBarraSuperior = EstiloTextoBase(tamanioLetra, Colores.textoBarraSuperior);
 
-TextStyle estiloTextoPantallaError = const TextStyle(
-    fontSize: tamanioLetra,
-    color: Colores.textoPrincipal,
-    fontWeight: FontWeight.bold
-);
+TextStyle estiloTextoPantallaError = EstiloTextoBase(tamanioLetra, Colores.textoPrincipal);
+
+class EstiloTextoBase extends TextStyle
+{
+  EstiloTextoBase(double tamanioLetra, colorPrincipal) :
+        super(fontSize: tamanioLetra, color: colorPrincipal, fontWeight: FontWeight.bold);
+}

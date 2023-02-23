@@ -1,4 +1,4 @@
-import 'package:flutter_demo/dominio/i_dispositivo.dart';
+import 'package:flutter_demo/dominio/dispositivo/i_dispositivo.dart';
 
 class ComprobarConexionInternet
 {

@@ -1,11 +1,12 @@
-import 'package:flutter/services.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
+import 'package:flutter_demo/aplicacion/escaner/configurar_escaner_codigo_barras_use_case.dart';
+import 'package:flutter_demo/aplicacion/escaner/detener_busqueda_codigo_barras_use_case.dart';
+import 'package:flutter_demo/infraestructura/app.dart';
+import 'package:flutter_demo/infraestructura/escaner/escaner.dart';
+import 'package:flutter_demo/infraestructura/eventos/eventos_disponibles.dart';
 import 'package:flutter_demo/infraestructura/widgets/cargando.dart';
 import 'package:flutter_demo/infraestructura/widgets/scaffold_base.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
 class EscanerCodigoBarras extends StatefulWidget
 {
@@ -17,147 +18,66 @@ class EscanerCodigoBarras extends StatefulWidget
 
 class _EscanerCodigoBarrasState extends State<EscanerCodigoBarras>
 {
-  List<CameraDescription> camarasDisponibles = [];
-  CameraController ?cameraController;
-  String error = "";
+  Escaner escaner = Escaner();
   bool ocupado = false;
-
-  late BarcodeScanner escaner;
 
   @override
   void initState()
   {
     super.initState();
 
-    escaner = BarcodeScanner(formats: [BarcodeFormat.all]);
+    SchedulerBinding.instance.addPostFrameCallback((_) => cargarEscanerCodigoBarras());
 
-    SchedulerBinding.instance.addPostFrameCallback((_) => cargarCamaras());
+    _agregarListenerEventos();
   }
 
   @override
   Widget build(BuildContext context) {
     Widget scaffold = ScaffoldBase(
-      barraSuperior: Traducciones.of(context).traducir('EscanerlbEscaner'),
-      cuerpo: Center(
-        child: Cargando(),
-      ),
-      error: error,
+        barraSuperior: traduccion(context, 'EscanerlbEscaner'),
+        cuerpo: Center(
+          child: Cargando(),
+        )
     );
 
-    if (cameraController != null)
+    if (escaner.getWidgetCamera() != null)
     {
       scaffold = ScaffoldBase(
-          barraSuperior: Traducciones.of(context).traducir('EscanerlbEscaner'),
-          cuerpo: CameraPreview(cameraController!),
-          error: error
+          barraSuperior: traduccion(context, 'EscanerlbEscaner'),
+          cuerpo: escaner.getWidgetCamera()
       );
     }
 
     return scaffold;
   }
 
-  Future<void> cargarCamaras() async
+  Future<void> cargarEscanerCodigoBarras() async
   {
-    await availableCameras().then((value) {
-      camarasDisponibles = value;
-      cameraController = configurarControlador();
-    })
-    .catchError((e) {
-      error = e;
-    });
+    ConfigurarEscanerCodigoBarrasUseCase configurarEscanerCodigoBarrasUseCase = ConfigurarEscanerCodigoBarrasUseCase(escaner);
+    await configurarEscanerCodigoBarrasUseCase.invoke();
 
     setState(() {});
   }
 
-  CameraController configurarControlador() {
-    CameraController cameraController = CameraController(
-        camarasDisponibles[0],
-        ResolutionPreset.high,
-        enableAudio: false
-    );
-
-    cameraController.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-
-      cameraController.startImageStream(_procesarImagenes);
-
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        error = e.code;
-        setState(() {});
-      }
-    });
-
-    return cameraController;
-  }
-
-  Future<void> _procesarImagenes(CameraImage image) async
+  void _agregarListenerEventos()
   {
-    final WriteBuffer allBytes = WriteBuffer();
-    for (final Plane plane in image.planes) {
-      allBytes.putUint8List(plane.bytes);
-    }
-    final bytes = allBytes
-        .done()
-        .buffer
-        .asUint8List();
-
-    final Size imageSize =
-    Size(image.width.toDouble(), image.height.toDouble());
-
-    final camera = camarasDisponibles[0];
-    final imageRotation =
-    InputImageRotationValue.fromRawValue(camera.sensorOrientation);
-    if (imageRotation == null) return;
-
-    final inputImageFormat =
-    InputImageFormatValue.fromRawValue(image.format.raw);
-    if (inputImageFormat == null) return;
-
-    final planeData = image.planes.map(
-          (Plane plane) {
-        return InputImagePlaneMetadata(
-          bytesPerRow: plane.bytesPerRow,
-          height: plane.height,
-          width: plane.width,
-        );
-      },
-    ).toList();
-
-    final inputImageData = InputImageData(
-      size: imageSize,
-      imageRotation: imageRotation,
-      inputImageFormat: inputImageFormat,
-      planeData: planeData,
-    );
-
-    final inputImage =
-    InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
-
-    _obtenerCodigoBarras(inputImage);
-  }
-
-  Future<void> _obtenerCodigoBarras(InputImage inputImage) async
-  {
-    if (ocupado) return;
-    ocupado = true;
-
-    final barcodes = await escaner.processImage(inputImage);
-
-    for (int i = 0; i < barcodes.length; i++)
+    eventoCodigoBarras.subscribe((args)
     {
-      if (barcodes[i].displayValue != null)
-      {
-        await escaner.close();
+      _mostrarCodigoBarras(args!.valor);
+    });
+  }
 
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Código detectado : " + barcodes[i].displayValue!)));
-        i = barcodes.length;
-      }
-    }
+  void _mostrarCodigoBarras(String valorCodigoBarras)
+  {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Código detectado : " + valorCodigoBarras)));
+  }
+
+  @override
+  Future<void> dispose() async
+  {
+    super.dispose();
+    DetenerBusquedaCodigoBarrasUseCase detenerBusquedaCodigoBarrasUseCase = DetenerBusquedaCodigoBarrasUseCase(escaner);
+    await detenerBusquedaCodigoBarrasUseCase.invoke();
   }
 
 }

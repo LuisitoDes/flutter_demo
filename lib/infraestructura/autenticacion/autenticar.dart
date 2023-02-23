@@ -1,5 +1,5 @@
-import 'package:flutter_demo/dominio/i_autenticar.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
+import 'package:flutter_demo/dominio/autenticacion/i_autenticar.dart';
+import 'package:flutter_demo/infraestructura/app.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth_android/local_auth_android.dart';
@@ -22,7 +22,7 @@ class Autenticar implements IAutenticar
   Future<bool> autenticarUsuario() async
   {
     bool autenticado = await authentication.authenticate(
-      localizedReason: Traducciones.of(context).traducir('AutenticarlbExplicacion'),
+      localizedReason: traduccion(context, 'AutenticarlbExplicacion'),
       authMessages: [
         construirMensajeAndroid(),
         construirMensajeIos()
@@ -36,15 +36,15 @@ class Autenticar implements IAutenticar
   AndroidAuthMessages construirMensajeAndroid()
   {
     return AndroidAuthMessages(
-      signInTitle: Traducciones.of(context).traducir('AutenticarlbMensaje'),
-      cancelButton: Traducciones.of(context).traducir('AutenticarbtnCancelar')
+      signInTitle: traduccion(context, 'AutenticarlbMensaje'),
+      cancelButton: traduccion(context, 'AutenticarbtnCancelar')
     );
   }
 
   IOSAuthMessages construirMensajeIos()
   {
     return IOSAuthMessages(
-        cancelButton: Traducciones.of(context).traducir('AutenticarbtnCancelar')
+        cancelButton: traduccion(context, 'AutenticarbtnCancelar')
     );
   }
 

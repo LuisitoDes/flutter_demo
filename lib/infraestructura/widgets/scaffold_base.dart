@@ -1,8 +1,8 @@
+import 'package:flutter_demo/infraestructura/app.dart';
 import 'package:flutter_demo/infraestructura/colores.dart';
 import 'package:flutter_demo/infraestructura/estilos.dart';
-import 'package:flutter_demo/infraestructura/medidas.dart';
+import 'package:flutter_demo/infraestructura/dispositivo/medidas.dart';
 import 'package:flutter_demo/infraestructura/paginas.dart';
-import 'package:flutter_demo/infraestructura/traducciones.dart';
 import 'package:flutter_demo/infraestructura/widgets/boton_primario.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class ScaffoldBase extends StatelessWidget
 
     if (error != null && error!.isNotEmpty)
     {
-      barraSuperior ??= Traducciones.of(context).traducir("ApplbNombre");
+      barraSuperior ??= traduccion(context, "ApplbNombre");
       return Scaffold(
           appBar: construirBarraSuperior(barraSuperior!),
           body: Container(
@@ -40,7 +40,7 @@ class ScaffoldBase extends StatelessWidget
                   padding: EdgeInsets.only(bottom: separacionPantallaError),
                   child: Text(error!, style: estiloTextoPantallaError),
                 ),
-                BotonPrimario(Traducciones.of(context).traducir('MenubtnReintentar'), ()
+                BotonPrimario(traduccion(context, 'MenubtnReintentar'), ()
                 {
                   recargarInicio(context);
                 })
@@ -60,7 +60,7 @@ class ScaffoldBase extends StatelessWidget
 
     if (menuLateral != null)
     {
-      barraSuperior ??= Traducciones.of(context).traducir("ApplbNombre");
+      barraSuperior ??= traduccion(context, "ApplbNombre");
       scaffold = Scaffold(
           appBar: construirBarraSuperior(barraSuperior!),
           drawer: menuLateral,

@@ -15,14 +15,15 @@ class BancoXApp extends StatelessWidget
   Widget build(BuildContext context)
   {
     return MaterialApp(
-      home: PantallaInicio(),
+      home: const PantallaInicio(),
       supportedLocales: _obtenerIdiomasSoportados(),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         Traducciones.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      debugShowCheckedModeBanner: false,
       routes:
       {
         splash: (context) => const PantallaInicio(),

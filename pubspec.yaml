@@ -14,10 +14,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  camera: 0.10.3
   webview_flutter: 4.0.5
   flutter_launcher_icons: 0.11.0
-  google_mlkit_barcode_scanning: 0.5.0
   whatsapp_unilink: 2.1.0
   url_launcher: 6.1.9
   local_auth: 2.1.3

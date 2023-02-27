@@ -4,8 +4,7 @@ import 'package:flutter_demo/infraestructura/paginas.dart';
 import 'package:flutter_demo/infraestructura/widgets/boton_con_icono.dart';
 import 'package:flutter_demo/infraestructura/widgets/png_visor.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MenuLateral extends Drawer
 {
@@ -23,7 +22,7 @@ class MenuLateral extends Drawer
           DrawerHeader(
               child: PngVisor('logo')
           ),
-          //BotonMenuLateral(traduccion(context, 'MenubtnEscaner'), Icons.barcode_reader, _accederCamara),
+          BotonMenuLateral(traduccion(context, 'MenubtnEscaner'), Icons.barcode_reader, _accederCamara),
           BotonMenuLateral(traduccion(context, 'MenubtnWhatsapp'), Icons.message, _enviarWhatsapp),
           BotonMenuLateral(traduccion(context, 'MenubtnAcceder'), Icons.person, _accederPortal),
           BotonMenuLateral(traduccion(context, 'MenubtnAutenticar'), Icons.security, _autenticar)
@@ -39,12 +38,7 @@ class MenuLateral extends Drawer
 
   Future<void> _enviarWhatsapp() async
   {
-    const link = WhatsAppUnilink(
-        phoneNumber: '666777888',
-        text: "Mensaje"
-    );
-
-    await launchUrl(link.asUri());
+    await launchUrlString("https://wa.me/15551234567?text=I'm%20interested%20in%20your%20car%20for%20sale");
   }
 
   void _accederPortal()

@@ -1,6 +1,5 @@
 #!/bin/sh
-rm ios/Podfile
-pod install
 flutter clean
+flutter pub get
 flutter build ios
 flutter run --release

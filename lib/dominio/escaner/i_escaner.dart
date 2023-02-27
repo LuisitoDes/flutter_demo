@@ -7,4 +7,8 @@ abstract class IEscaner
   Future<void> iniciarServicioEscaner();
 
   Future<void> detenerServicioEscaner();
+
+  Future<bool> comprobarPermisos();
+
+  Future<bool> pedirPermisos();
 }

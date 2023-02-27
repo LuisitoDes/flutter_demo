@@ -5,11 +5,13 @@ import 'package:flutter_demo/dominio/escaner/i_escaner.dart';
 import 'package:flutter_demo/infraestructura/eventos/codigo_barras.dart';
 import 'package:flutter_demo/infraestructura/eventos/eventos_disponibles.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Escaner extends IEscaner
 {
   late BarcodeScanner escaner;
   CameraController ?controlador;
+  CameraDescription ?camera;
 
   bool bloqueado = false;
 
@@ -94,21 +96,23 @@ class Escaner extends IEscaner
     final inputImageFormat = InputImageFormatValue.fromRawValue(image.format.raw);
     if (inputImageFormat == null) return;
 
-    final planeData = image.planes.map((Plane plane)
+    List<InputImagePlaneMetadata> listaPlaneData = [];
+
+    image.planes.map((Plane plane)
     {
-        return InputImagePlaneMetadata(
+        listaPlaneData.add(InputImagePlaneMetadata(
           bytesPerRow: plane.bytesPerRow,
           height: plane.height,
           width: plane.width,
-        );
+        ));
       },
-    ).toList();
+    );
 
     final inputImageData = InputImageData(
       size: imageSize,
       imageRotation: imageRotation,
       inputImageFormat: inputImageFormat,
-      planeData: planeData,
+      planeData: listaPlaneData,
     );
 
     final inputImage = InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
@@ -145,5 +149,19 @@ class Escaner extends IEscaner
     }
 
     return camara;
+  }
+
+  @override
+  Future<bool> comprobarPermisos() async
+  {
+    PermissionStatus estado = await Permission.camera.status;
+    return estado.isGranted;
+  }
+
+  @override
+  Future<bool> pedirPermisos() async
+  {
+    PermissionStatus estado = await Permission.camera.request();
+    return estado.isGranted;
   }
 }

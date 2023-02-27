@@ -55,6 +55,7 @@ class _AutenticacionState extends State<Autenticacion>
     if (resultado)
     {
       valorEstadoAutenticacion = 'AutenticacionlbAutenticado';
+      setState(() {});
     }
   }
 }

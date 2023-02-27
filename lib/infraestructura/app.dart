@@ -9,7 +9,7 @@ import 'package:flutter_demo/infraestructura/ui/visor_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class BancoXApp extends StatelessWidget
+class FlutterDemoApp extends StatelessWidget
 {
   @override
   Widget build(BuildContext context)

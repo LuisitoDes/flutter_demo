@@ -5,5 +5,5 @@ Future<void> main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(BancoXApp());
+  runApp(FlutterDemoApp());
 }

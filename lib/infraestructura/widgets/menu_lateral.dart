@@ -38,7 +38,7 @@ class MenuLateral extends Drawer
 
   Future<void> _enviarWhatsapp() async
   {
-    await launchUrlString("https://wa.me/15551234567?text=I'm%20interested%20in%20your%20car%20for%20sale");
+    await launchUrlString("https://api.whatsapp.com/send?phone=666777888");
   }
 
   void _accederPortal()

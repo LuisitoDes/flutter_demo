@@ -8,11 +8,11 @@
   "AutenticarlbExplicacion" : "Por favor autentiquese para realizar una prueba",
   "AutenticarbtnCancelar" : "No, gracias",
   "AutenticarlbMensaje" : "Identificación requerida",
-  "AutenticacionbtnComenzar" : "Iniciar proceso",
-  "AutenticacionlbNoAutenticado" : "No autenticado",
-  "AutenticacionlbAutenticado" : "Autenticado",
+  "AutenticarbtnComenzar" : "Iniciar proceso",
+  "AutenticarlbNoAutenticado" : "No autenticado",
+  "AutenticarlbAutenticado" : "Autenticado",
   "EscanerlbEscaner": "Lector código de barras",
-  "AutenticacionlbAutenticar" : "Autenticacion",
+  "AutenticarlbAutenticar" : "Autenticación",
   "Visorlbvisor" : "WebView",
   "VisorlbNoHayConexion" : "No hay conexión a internet"
 }

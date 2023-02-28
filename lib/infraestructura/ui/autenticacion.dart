@@ -23,14 +23,14 @@ class _AutenticacionState extends State<Autenticacion>
   {
     super.initState();
 
-    valorEstadoAutenticacion = "AutenticacionlbNoAutenticado";
+    valorEstadoAutenticacion = "AutenticarlbNoAutenticado";
   }
 
   @override
   Widget build(BuildContext context)
   {
     return ScaffoldBase(
-      barraSuperior: traduccion(context, 'AutenticacionlbAutenticar'),
+      barraSuperior: traduccion(context, 'AutenticarlbAutenticar'),
       cuerpo: Container(
         width: double.infinity,
         child: Column(
@@ -40,7 +40,7 @@ class _AutenticacionState extends State<Autenticacion>
               padding: EdgeInsets.only(bottom: separacion),
               child: Text(traduccion(context, valorEstadoAutenticacion)),
             ),
-            BotonPrimario(traduccion(context, 'AutenticacionbtnComenzar'), _comenzarAutenticacion)
+            BotonPrimario(traduccion(context, 'AutenticarbtnComenzar'), _comenzarAutenticacion)
           ],
         ),
       ),
@@ -54,7 +54,7 @@ class _AutenticacionState extends State<Autenticacion>
 
     if (resultado)
     {
-      valorEstadoAutenticacion = 'AutenticacionlbAutenticado';
+      valorEstadoAutenticacion = 'AutenticarlbAutenticado';
       setState(() {});
     }
   }

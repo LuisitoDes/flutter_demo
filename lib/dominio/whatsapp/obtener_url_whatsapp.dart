@@ -8,11 +8,11 @@ class ObtenerUrlWhatsapp
 
   Future<String> invoke() async
   {
-    String urlW = "whatsapp://send?phone=+34637637637&text=Hello World!";
+    String urlW = "whatsapp://send?phone=+34637578823&text=Hello World!";
 
     if (await dispositivo.esIos())
     {
-      urlW = "https://wa.me/+34637637637?text=${Uri.parse('Hi, I need some help')}";
+      urlW = "https://api.whatsapp.com/send?phone=+34637578823";
     }
 
     return urlW;

@@ -53,5 +53,9 @@
     <string>El permiso de la cámara es necesario para el uso del resto de funcione</string>
     <key>NSFaceIDUsageDescription</key>
     <string>Why is my app authenticating using face id?</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>whatsapp</string>
+    </array>
 </dict>
 </plist>

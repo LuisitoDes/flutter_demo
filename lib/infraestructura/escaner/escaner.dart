@@ -61,8 +61,9 @@ class Escaner extends IEscaner
   {
     controlador = CameraController(
         camara,
-        ResolutionPreset.high,
-        enableAudio: false
+        ResolutionPreset.medium,
+        enableAudio: false,
+        imageFormatGroup: ImageFormatGroup.yuv420
     );
 
     await controlador!.initialize().then((_)

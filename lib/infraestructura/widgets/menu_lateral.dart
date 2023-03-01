@@ -7,6 +7,7 @@ import 'package:flutter_demo/infraestructura/widgets/boton_con_icono.dart';
 import 'package:flutter_demo/infraestructura/widgets/png_visor.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MenuLateral extends Drawer
 {
@@ -42,7 +43,7 @@ class MenuLateral extends Drawer
     ObtenerUrlWhatsappUseCase obtenerUrlWhatsappUseCase = ObtenerUrlWhatsappUseCase(Dispositivo());
     String url = await obtenerUrlWhatsappUseCase.invoke();
 
-    await launchUrl(Uri.parse(url));
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
   void _accederPortal()

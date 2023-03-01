@@ -1,14 +1,14 @@
 {
   "ApplbNombre" : "Flutter Demo",
   "MenubtnAcceder" : "Acceder",
-  "MenubtnEscaner" : "Lector código de barras",
+  "MenubtnEscaner" : "Cámara",
   "MenubtnWhatsapp" : "Abrir whatsapp",
   "MenubtnReintentar" : "Reintentar",
   "MenubtnAutenticar" : "Autenticar",
   "AutenticarlbExplicacion" : "Por favor autentiquese para realizar una prueba",
   "AutenticarbtnCancelar" : "No, gracias",
   "AutenticarlbMensaje" : "Identificación requerida",
-  "EscanerlbEscaner": "Lector código de barras",
+  "EscanerlbEscaner": "Cámara",
   "Visorlbvisor" : "WebView",
   "VisorlbNoHayConexion" : "No hay conexión a internet"
 }

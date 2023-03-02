@@ -1,17 +1,17 @@
 import 'package:flutter_demo/dominio/escaner/comprobar_permisos_camara.dart';
-import 'package:flutter_demo/dominio/escaner/configurar_escaner.dart';
+import 'package:flutter_demo/dominio/escaner/iniciar_busqueda_codigo_barras.dart';
 import 'package:flutter_demo/dominio/escaner/i_escaner.dart';
 import 'package:flutter_demo/dominio/escaner/obtener_camara_disponible.dart';
 import 'package:flutter_demo/dominio/escaner/solicitar_permisos_camara.dart';
 
-class ConfigurarEscanerCodigoBarrasUseCase
+class IniciarBusquedaCodigoBarrasUseCase
 {
   late ComprobarPermisosCamara comprobarPermisosCamara;
   late SolicitarPermisosCamara solicitarPermisos;
   late ObtenerCamaraDisponible obtenerCamaraDisponible;
   late ConfigurarEscaner configurarEscaner;
 
-  ConfigurarEscanerCodigoBarrasUseCase(IEscaner escaner)
+  IniciarBusquedaCodigoBarrasUseCase(IEscaner escaner)
   {
     comprobarPermisosCamara = ComprobarPermisosCamara(escaner);
     solicitarPermisos = SolicitarPermisosCamara(escaner);

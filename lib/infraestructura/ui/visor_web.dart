@@ -1,12 +1,12 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_demo/aplicacion/portal/obtener_url_visor_web_use_case.dart';
 import 'package:flutter_demo/infraestructura/app.dart';
-import 'package:flutter_demo/infraestructura/colores.dart';
 import 'package:flutter_demo/infraestructura/dispositivo/dispositivo.dart';
+import 'package:flutter_demo/infraestructura/eventos/eventos_disponibles.dart';
+import 'package:flutter_demo/infraestructura/portal/navegador.dart';
 import 'package:flutter_demo/infraestructura/widgets/cargando.dart';
 import 'package:flutter_demo/infraestructura/widgets/scaffold_base.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class VisorWeb extends StatefulWidget
 {
@@ -18,18 +18,18 @@ class VisorWeb extends StatefulWidget
 
 class _VisorWebState extends State<VisorWeb>
 {
-  late WebViewController controller;
+  Navegador navegador = Navegador();
   String error = "";
-  bool mostrarNavegador = false;
+  String urlPortal = "";
   
   @override
   void initState()
   {
     super.initState();
 
-    controller = configurarControlador();
-
     SchedulerBinding.instance.addPostFrameCallback((_) => _iniciarNavegacion());
+
+    _agregarListenerEventos();
   }
 
   @override
@@ -43,15 +43,13 @@ class _VisorWebState extends State<VisorWeb>
       error: error,
     );
 
-    if (mostrarNavegador)
+    if (urlPortal.isNotEmpty)
     {
       scaffold = WillPopScope(onWillPop: _onWillPop,
           child: ScaffoldBase(
             barraSuperior: traduccion(context, 'Visorlbvisor'),
             error: error,
-            cuerpo: WebViewWidget(
-              controller: controller,
-            ),
+            cuerpo: navegador.obtenerNavegador(urlPortal),
           )
       );
     }
@@ -60,63 +58,39 @@ class _VisorWebState extends State<VisorWeb>
 
   Future<void> _iniciarNavegacion() async
   {
-    ObtenerUrlVisorWebUseCase obtenerUrlVisorWebUseCase = ObtenerUrlVisorWebUseCase(Dispositivo());
-    String urlPortal = await obtenerUrlVisorWebUseCase.invoke();
+    ObtenerUrlVisorWebUseCase obtenerUrlVisorWebUseCase = ObtenerUrlVisorWebUseCase(Dispositivo(), navegador);
+    urlPortal = await obtenerUrlVisorWebUseCase.invoke();
 
-    if (urlPortal.isNotEmpty)
-    {
-      controller.loadRequest(Uri.parse(urlPortal));
-      mostrarNavegador = true;
-    }
-    else
+    if (urlPortal.isEmpty)
     {
       error = traduccion(context, 'VisorlbNoHayConexion');
     }
+
     setState(() {});
-  }
-  
-  WebViewController configurarControlador()
-  {
-    WebViewController wc = WebViewController();
-    wc.setJavaScriptMode(JavaScriptMode.unrestricted);
-    wc.setBackgroundColor(Colores.fondo);
-    wc.clearCache();
-    wc.setNavigationDelegate(configurarNavegador());
-
-    return wc;
-  }
-
-  NavigationDelegate configurarNavegador()
-  {
-    NavigationDelegate navigationDelegate = NavigationDelegate(
-      onPageStarted: onPageStarted,
-      onPageFinished: onPageFinished
-    );
-
-    return navigationDelegate;
   }
 
   Future<bool> _onWillPop() async
   {
     bool volver = true;
 
-    if (await controller.canGoBack())
+    if (await navegador.atras())
     {
-      controller.goBack();
       volver = !volver;
     }
 
     return volver;
   }
 
-
-  void onPageStarted(String url)
+  void _agregarListenerEventos()
   {
-    print("OnPageStarted -> " + url);
-  }
+    eventoEnvioUrlInicio.subscribe((args)
+    {
+      print("OnPageStarted -> " + args!.valor);
+    });
 
-  void onPageFinished(String url)
-  {
-    print("OnPageFinished -> " + url);
+    eventoEnvioUrlFin.subscribe((args)
+    {
+      print("OnPageFinished -> " + args!.valor);
+    });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter_demo/aplicacion/dispositivo/obtener_idiomas_soportados_use_case.dart';
 import 'package:flutter_demo/infraestructura/paginas.dart';
 import 'package:flutter_demo/infraestructura/dispositivo/traducciones.dart';
-import 'package:flutter_demo/infraestructura/ui/escaner_codigo_barras.dart';
+import 'package:flutter_demo/infraestructura/ui/camara.dart';
 import 'package:flutter_demo/infraestructura/ui/inicio.dart';
 import 'package:flutter_demo/infraestructura/ui/menu_principal.dart';
 import 'package:flutter_demo/infraestructura/ui/visor_web.dart';
@@ -28,7 +28,7 @@ class FlutterDemoApp extends StatelessWidget
         splash: (context) => const PantallaInicio(),
         menu: (context) => const MenuPrincipal(),
         visor: (context) => const VisorWeb(),
-        escanerCodigoBarras: (context) => const EscanerCodigoBarras()
+        escanerCodigoBarras: (context) => const Camara()
       },
     );
   }

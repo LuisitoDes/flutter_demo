@@ -25,7 +25,7 @@ class MenuLateral extends Drawer
           DrawerHeader(
               child: PngVisor('logo')
           ),
-          BotonMenuLateral(traduccion(context, 'MenubtnEscaner'), Icons.barcode_reader, _accederCamara),
+          BotonMenuLateral(traduccion(context, 'MenubtnCamara'), Icons.barcode_reader, _accederCamara),
           BotonMenuLateral(traduccion(context, 'MenubtnWhatsapp'), Icons.message, _enviarWhatsapp),
           BotonMenuLateral(traduccion(context, 'MenubtnAcceder'), Icons.person, _accederPortal)
         ],

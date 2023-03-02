@@ -1,4 +1,4 @@
-import 'package:flutter_demo/aplicacion/escaner/configurar_escaner_codigo_barras_use_case.dart';
+import 'package:flutter_demo/aplicacion/escaner/iniciar_busqueda_codigo_barras_use_case.dart';
 import 'package:flutter_demo/aplicacion/escaner/detener_busqueda_codigo_barras_use_case.dart';
 import 'package:flutter_demo/infraestructura/app.dart';
 import 'package:flutter_demo/infraestructura/escaner/escaner.dart';
@@ -8,15 +8,15 @@ import 'package:flutter_demo/infraestructura/widgets/scaffold_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-class EscanerCodigoBarras extends StatefulWidget
+class Camara extends StatefulWidget
 {
-  const EscanerCodigoBarras({super.key});
+  const Camara({super.key});
 
   @override
-  State<EscanerCodigoBarras> createState() => _EscanerCodigoBarrasState();
+  State<Camara> createState() => _CamaraState();
 }
 
-class _EscanerCodigoBarrasState extends State<EscanerCodigoBarras>
+class _CamaraState extends State<Camara>
 {
   Escaner escaner = Escaner();
   bool ocupado = false;
@@ -26,7 +26,7 @@ class _EscanerCodigoBarrasState extends State<EscanerCodigoBarras>
   {
     super.initState();
 
-    SchedulerBinding.instance.addPostFrameCallback((_) => cargarEscanerCodigoBarras());
+    SchedulerBinding.instance.addPostFrameCallback((_) => cargarCamara());
 
     _agregarListenerEventos();
   }
@@ -34,26 +34,26 @@ class _EscanerCodigoBarrasState extends State<EscanerCodigoBarras>
   @override
   Widget build(BuildContext context) {
     Widget scaffold = ScaffoldBase(
-        barraSuperior: traduccion(context, 'EscanerlbEscaner'),
+        barraSuperior: traduccion(context, 'CamaralbEscaner'),
         cuerpo: Center(
           child: Cargando(),
         )
     );
 
-    if (escaner.getWidgetCamera() != null)
+    if (escaner.getWidgetCamara() != null)
     {
       scaffold = ScaffoldBase(
-          barraSuperior: traduccion(context, 'EscanerlbEscaner'),
-          cuerpo: escaner.getWidgetCamera()
+          barraSuperior: traduccion(context, 'CamaralbEscaner'),
+          cuerpo: escaner.getWidgetCamara()
       );
     }
 
     return scaffold;
   }
 
-  Future<void> cargarEscanerCodigoBarras() async
+  Future<void> cargarCamara() async
   {
-    ConfigurarEscanerCodigoBarrasUseCase configurarEscanerCodigoBarrasUseCase = ConfigurarEscanerCodigoBarrasUseCase(escaner);
+    IniciarBusquedaCodigoBarrasUseCase configurarEscanerCodigoBarrasUseCase = IniciarBusquedaCodigoBarrasUseCase(escaner);
     await configurarEscanerCodigoBarrasUseCase.invoke();
 
     setState(() {});

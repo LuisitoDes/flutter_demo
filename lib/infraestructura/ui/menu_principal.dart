@@ -18,7 +18,7 @@ class _MenuPrincipalState extends State<MenuPrincipal>
   {
     return ScaffoldBase(
       menuLateral: MenuLateral(),
-      cuerpo: Container(
+      cuerpo: SizedBox(
         width: double.infinity,
         child: Center(
           child: PngVisor('logo'),

@@ -1,4 +1,3 @@
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_demo/aplicacion/portal/obtener_url_visor_web_use_case.dart';
 import 'package:flutter_demo/infraestructura/app.dart';
 import 'package:flutter_demo/infraestructura/dispositivo/dispositivo.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_demo/infraestructura/portal/navegador.dart';
 import 'package:flutter_demo/infraestructura/widgets/cargando.dart';
 import 'package:flutter_demo/infraestructura/widgets/scaffold_base.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class VisorWeb extends StatefulWidget
 {

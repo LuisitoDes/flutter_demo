@@ -10,5 +10,6 @@
   "AutenticarlbMensaje" : "Identificación requerida",
   "CamaralbEscaner": "Cámara",
   "Visorlbvisor" : "WebView",
-  "VisorlbNoHayConexion" : "No hay conexión a internet"
+  "VisorlbNoHayConexion" : "No hay conexión a internet",
+  "TelefonoWhatsappPorIdioma" : ""
 }

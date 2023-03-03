@@ -10,8 +10,8 @@ class ObtenerUrlWhatsappUseCase
     obtenerUrlWhatsapp = ObtenerUrlWhatsapp(dispositivo);
   }
 
-  Future<String> invoke() async
+  Future<String> invoke(String telefono) async
   {
-    return await obtenerUrlWhatsapp.invoke();
+    return await obtenerUrlWhatsapp.invoke(telefono);
   }
 }
